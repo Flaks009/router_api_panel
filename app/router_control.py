@@ -52,7 +52,10 @@ def ssh_config(enabled=True, port=22, wan_access=True):
     requests.put(API['service_ssh'], data=json.dumps(data), headers=headers, verify=False)
 
 def reboot():
-    requests.put(API['reboot'],headers=headers,verify=False)
+    if auth('admin', 'admin123'):
+        requests.put(API['reboot'],headers=headers,verify=False)
+    else:
+        print('Username or password is invalid')
 
 '''
 if auth('admin', 'admin123'):
